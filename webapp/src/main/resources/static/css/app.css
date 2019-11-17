@@ -1,7 +1,10 @@
+h1 {
+    text-align: center;
+}
 .body-content {
-    margin: 30px auto;
     display: block;
-    width: 400px;
+    width: 500px;
+    margin: 30px auto;
 }
 .form-inline textarea.ratings-in {
     width: 100%;
