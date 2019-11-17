@@ -63,6 +63,13 @@
 			<artifactId>jquery</artifactId>
 			<version>3.4.1</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.webjars.npm/axios -->
+		<dependency>
+			<groupId>org.webjars.npm</groupId>
+			<artifactId>axios</artifactId>
+			<version>0.19.0</version>
+		</dependency>
+
 
 		<!-- webjars-locator does not work for some reason. It should resolve webjars versions. -->
 		<!--<dependency>

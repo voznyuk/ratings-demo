@@ -1,6 +1,29 @@
 class App {
     constructor() {
+        this.ratingsTextarea = $(".ratings-in");
         this.generateRatingsPanel = new GenerateRatingsPanel();
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        $(".btn-submit-ratings").click(e => this.submitRatings());
+    }
+
+    submitRatings() {
+        let ratingsStr = this.ratingsTextarea.val().trim();
+        ratingsStr
+            .split("\n")
+            .map(r => JSON.parse(r.trim()))
+            .forEach(r => this.submitOneRating(r));
+        this.ratingsTextarea.empty();
+    }
+
+    submitOneRating(rating) {
+        let options = {};
+        axios
+            .post('/rating/produce', rating, options)
+            .then(response => {console.log(response.status);})
+            .catch(error => {console.log(error);});
     }
 }
 
