@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Ratings Demo</title>
+
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <link rel="icon" type="image/png" href="/img/favicon/favicon.png" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900&amp;subset=cyrillic" rel="stylesheet">
+
+    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.css" rel="stylesheet">
+
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.js"></script>
+
+    <!-- App CSS & JS -->
+    <link rel="stylesheet" type="text/css" href="/css/app.css">
+    <script src="/js/app.js"></script>
+
+    </head>
+<body>
+
+<div class="body-content">
+
+    <div class="form-group">
+        <label>Rating entries (JSON)</label>
+        <textarea class="form-control ratings-in" rows="8"></textarea>
+        <div class="generate-controls form-inline">
+            Generate
+            <select class="form-control form-control-inline" id="generate-count">
+                <option selected>1</option>
+                <option>10</option>
+                <option>100</option>
+                <option>1000</option>
+            </select>
+            entry(s)&nbsp;
+            <button type="button" class="btn btn-sm btn-info btn-generate-entries">Generate</button>
+        </div>
+        <button type="button" class="btn btn-success btn-submit-ratings">Submit for processing</button>
+    </div>
+
+</div>
+
+</body>
+</html>
