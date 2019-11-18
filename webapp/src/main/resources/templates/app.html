@@ -12,11 +12,13 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=cyrillic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,900&amp;subset=cyrillic" rel="stylesheet">
 
-    <link href="/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/webjars/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
 
     <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
-    <script src="/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js"></script>
+    <script src="/webjars/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script src="/webjars/axios/0.19.0/dist/axios.min.js"></script>
+    <script src="/webjars/sockjs-client/1.1.2/sockjs.min.js"></script>
+    <script src="/webjars/webstomp-client/1.2.6/dist/webstomp.min.js"></script>
 
     <script src="/js/3rdparty/random.js"></script>
 
@@ -31,22 +33,28 @@
 
 <div class="body-content">
 
-    <div class="form-group">
-        <label>Rating entries (JSON)</label>
-        <textarea class="form-control ratings-in" rows="8"></textarea>
+    <section class="form-group add-rating">
+        <label>Add ratings (one JSON entry per line)</label>
+        <textarea class="form-control rating-text ratings-in" rows="8"></textarea>
         <div class="generate-controls form-inline">
             Generate
-            <select class="form-control form-control-inline" id="generate-count">
-                <option selected>1</option>
+            <select class="form-control form-control-sm form-control-inline" id="generate-count">
+                <option>1</option>
                 <option>10</option>
-                <option>100</option>
+                <option selected>100</option>
                 <option>1000</option>
             </select>
-            entry(s)&nbsp;
+            entries&nbsp;
             <button type="button" class="btn btn-sm btn-info btn-generate-entries">Generate</button>
         </div>
         <button type="button" class="btn btn-success btn-submit-ratings">Submit for processing</button>
-    </div>
+    </section>
+
+    <section class="form-group echo">
+        <label>Ratings echo from Kafka topic</label>
+        <div class="alert alert-dark rating-text ratings-echo"> </div>
+        <button type="button" class="btn btn-sm btn-info btn-clear-echo">Clear</button>
+    </section>
 
 </div>
 

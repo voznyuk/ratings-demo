@@ -1,3 +1,9 @@
+body {
+    /*
+    background-color: #2E3644;
+    color: white;
+    */
+}
 h1 {
     text-align: center;
 }
@@ -6,14 +12,36 @@ h1 {
     width: 500px;
     margin: 30px auto;
 }
-.form-inline textarea.ratings-in {
+label {
+    font-weight: bold;
+}
+
+section.add-rating .form-inline textarea.ratings-in {
     width: 100%;
 }
-.generate-controls {
+section.add-rating .generate-controls {
     margin: 10px 0 20px;
 }
-.btn-submit-ratings {
+section.add-rating .generate-controls select {
+    margin: auto 3px;
+}
+section.add-rating .btn-submit-ratings {
     margin: 0 auto;
     width: 100%;
     display: block;
+}
+
+section.echo {
+    margin-top: 50px;
+}
+section.echo .ratings-echo {
+    height: 200px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+/*utils*/
+.rating-text {
+    font-family: monospace;
+    font-size: 12px;
 }

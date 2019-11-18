@@ -26,13 +26,13 @@ public class KafkaAdapterController {
         ratingsEventBusService.sendMessage(JsonUtils.toJson(rating));
     }
 
-    @RequestMapping(value="/rating/consume", method = POST)
+    /*@RequestMapping(value="/rating/consume", method = POST)
     public List<RatingInfo> consumeRating() {
         // TODO
         return asList(
                 new RatingInfo((byte)5, VideoType.MOVIE, "NY"),
                 new RatingInfo((byte)4, VideoType.TV_SERIES, "LA")
                 );
-    }
+    }*/
 
 }

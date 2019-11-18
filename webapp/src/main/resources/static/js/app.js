@@ -2,6 +2,8 @@ class App {
     constructor() {
         this.ratingsTextarea = $(".ratings-in");
         this.generateRatingsPanel = new GenerateRatingsPanel();
+        this.ratingsWebSocket = new RatingsWebSocket(r => this.onRatingAdded(r));
+        this.ratingsEchoPanel = new RatingsEchoPanel(this.ratingsWebSocket);
         this.bindEvents();
     }
 
@@ -22,9 +24,15 @@ class App {
         let options = {};
         axios
             .post('/rating/produce', rating, options)
-            .then(response => {console.log(response.status);})
-            .catch(error => {console.log(error);});
+            .then(response => {console.log("Response status: " + response.status);})
+            .catch(error => {alert(error);});
     }
+
+    // data is echoed from Kafka topic
+    onRatingAdded(ratingJson) {
+        this.ratingsEchoPanel.onRatingAdded(ratingJson);
+    }
+
 }
 
 class GenerateRatingsPanel {
@@ -81,6 +89,54 @@ class RatingGenerator {
         }
         return r;
     }
+}
+
+class RatingsEchoPanel {
+
+    constructor(ratingsWebSocket) {
+        this.ratingsWebSocket = ratingsWebSocket;
+        this.resultDiv = $(".ratings-echo");
+        this.bindEvents();
+    }
+
+    bindEvents() {
+        $(".btn-clear-echo").click(e => this.clear());
+    }
+
+    clear() {
+        this.resultDiv.empty();
+    }
+
+    onRatingAdded(ratingJson) {
+        this.resultDiv.append($('<div>', {text: ratingJson}));
+    }
+}
+
+
+class RatingsWebSocket {
+
+    constructor(onRatingAdded) {
+        this.onRatingAdded = onRatingAdded;
+        this.connect();
+    }
+
+    connect() {
+        let socket = new SockJS('/stomp-websocket');
+        this.stompClient = webstomp.over(socket);
+        this.stompClient.connect({}, (frame) => {
+            console.log("Websocket connected");
+            this.stompClient.subscribe('/topic/ratings/echo', (response) => {
+                console.log("Received from websocket");
+                this.onRatingAdded(response.body);
+            });
+        });
+    }
+
+    // not used
+    sendRating(ratingJson) {
+        this.stompClient.send("/dest/ratings", {}, ratingJson);
+    }
+
 }
 
 $(document).ready(function() {
